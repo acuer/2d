@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>28046068-04a2-4673-85d0-1272664a92e8</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>mygame.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>PythonApplication1</Name>
+    <RootNamespace>PythonApplication1</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="game_framework.py" />
+    <Compile Include="main_state.py" />
+    <Compile Include="mygame.py" />
+    <Compile Include="start_state.py" />
+    <Compile Include="title_state.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".idea\.name" />
+    <Content Include=".idea\encodings.xml" />
+    <Content Include=".idea\misc.xml" />
+    <Content Include=".idea\modules.xml" />
+    <Content Include=".idea\sparkle.iml" />
+    <Content Include=".idea\vcs.xml" />
+    <Content Include=".idea\workspace.xml" />
+    <Content Include="back.png" />
+    <Content Include="hold.png" />
+    <Content Include="kpu_credit.png" />
+    <Content Include="l_run.png" />
+    <Content Include="l_stand.png" />
+    <Content Include="Map.png" />
+    <Content Include="resourses\BossWorm_Artpack\BossWorm_notes.txt" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_barf_strip12.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_biteE_strip5.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_biteN_strip5.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_biteS_strip5.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_biteW_strip5.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_drtpop_strip6.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_flopN.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_flopS.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_intro_strip16.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_jumpE_strip4.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_jumpN_strip4.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_jumpS_strip4.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_jumpW_strip4.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_mpctNE_strip4.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_mpctNW_strip4.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_mpctSE_strip4.png" />
+    <Content Include="resourses\BossWorm_Artpack\s_bsswrm_mpctSW_strip4.png" />
+    <Content Include="resourses\Caveworm_Artpack\Caveworm_notes.txt" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteE_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteNE_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteNW_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteN_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteSE_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteSW_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteS_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_biteW_strip9.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_dieSE_strip3.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_dieSW_strip3.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_drtpops_strip6.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_flopSE_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_flopSW_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_frownSE_strip4.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_frownSW_strip4.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpE_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpNE_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpNW_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpN_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpSE_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpSW_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpS_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_jumpW_strip5.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_ouchSE_strip6.png" />
+    <Content Include="resourses\Caveworm_Artpack\s_cvwrm_ouchSW_strip6.png" />
+    <Content Include="resourses\Eifflelyte.png" />
+    <Content Include="resourses\NITD_Boss1.png" />
+    <Content Include="resourses\Skeleton.gif" />
+    <Content Include="resourses\Yuri02.PNG" />
+    <Content Include="r_run.png" />
+    <Content Include="r_stand.png" />
+    <Content Include="title.png" />
+    <Content Include="Yuri02.PNG" />
+    <Content Include="__pycache__\game_framework.cpython-34.pyc" />
+    <Content Include="__pycache__\main_state.cpython-34.pyc" />
+    <Content Include="__pycache__\start_state.cpython-34.pyc" />
+    <Content Include="__pycache__\title_state.cpython-34.pyc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".idea\" />
+    <Folder Include="resourses\" />
+    <Folder Include="resourses\BossWorm_Artpack\" />
+    <Folder Include="resourses\Caveworm_Artpack\" />
+    <Folder Include="__pycache__\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
