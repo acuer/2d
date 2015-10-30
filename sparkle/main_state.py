@@ -42,10 +42,10 @@ class Pause:
 
 class Boy:
     image = None
-    LEFT_RUN, RIGHT_RUN, LEFT_STAND, RIGHT_STAND, JUMP_UP, JUMP_DOWN = 0, 1, 2, 3, 4, 5
+    LEFT_RUN, RIGHT_RUN, LEFT_STAND, RIGHT_STAND, JUMP_UP, JUMP_DOWN, LEFT_SIT, RIGHT_SIT = 0, 1, 2, 3, 4, 5, 6, 7
 
     def __init__(self):
-        self.x, self.y = 20, 60
+        self.x, self.y = 50, 60
         self.frame = 0
         self.run_frames = 0
         self.stand_frames = 0
@@ -71,15 +71,29 @@ class Boy:
             if self.state in (self.RIGHT_RUN, ):
                 self.state = self.RIGHT_STAND
 
+        elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_DOWN):
+            if self.state in (self.RIGHT_STAND, self.RIGHT_RUN ):
+                self.state = self.RIGHT_SIT
+            if self.state in (self.LEFT_STAND, self.LEFT_RUN ):
+                self.state = self.LEFT_SIT
+
+        elif(event.type, event.key) == (SDL_KEYUP, SDLK_DOWN):
+            if self.state in (self.LEFT_SIT, ):
+                self.state = self.LEFT_STAND
+            elif self.state in (self.RIGHT_SIT, ):
+                self.state = self.RIGHT_STAND
+
+     
+
 
     def update(self):
         
         self.frameProcess()
        
         if self.state == self.RIGHT_RUN:
-            self.x = min(800, self.x + 5)
+            self.x = min(750, self.x + 9)
         elif self.state == self.LEFT_RUN:
-            self.x = max(0, self.x - 5)
+            self.x = max(50, self.x - 9)
             
 
 
@@ -93,11 +107,11 @@ class Boy:
     def draw(self):
         if self.state == self.RIGHT_RUN:
             self.image = load_image('r_run.png')
-            self.image.clip_draw(self.frame * 100, 0, 95, 95, self.x, self.y)
+            self.image.clip_draw(self.frame * 100, 0, 95, 95, self.x, self.y - 10)
         
         elif self.state == self.LEFT_RUN:
             self.image = load_image('l_run.png')
-            self.image.clip_draw(self.frame * 102, 0, 90, 95, self.x, self.y)
+            self.image.clip_draw(self.frame * 102, 0, 90, 95, self.x, self.y - 10)
 
         elif self.state == self.LEFT_STAND:
             self.image = load_image('l_stand.png')
@@ -106,6 +120,17 @@ class Boy:
         elif self.state == self.RIGHT_STAND:
             self.image = load_image('r_stand.png')
             self.image.clip_draw(self.frame * 67, 0, 67, 108, self.x, self.y)
+
+        elif self.state == self.LEFT_SIT:
+            self.image = load_image('lsit.png')
+            self.image.clip_draw(self.frame * 53, 0, 53, 73, self.x, self.y - 15)
+
+        elif self.state == self.RIGHT_SIT:
+            self.image = load_image('rsit.png')
+            self.image.clip_draw(self.frame * 53, 0, 53, 73, self.x, self.y - 15)
+
+        
+
             
 
     def frameProcess(self):
@@ -115,8 +140,9 @@ class Boy:
             self.frame = (self.frame + 1) % 8
          elif self.state == self.RIGHT_STAND or self.state == self.LEFT_STAND:
             self.frame = (self.frame + 1 ) % 7
-
-            
+         elif self.state == self.RIGHT_SIT or self.state == self.LEFT_SIT:
+             self.frame = (self.frame + 1 ) % 4
+      
 
 def enter():
     global boy, city, back
@@ -164,7 +190,7 @@ def draw():
     city.draw()
     boy.draw()
     update_canvas()
-    delay(0.04)
+    delay(0.05)
 
 
 
