@@ -1,4 +1,4 @@
-import game_framework
+﻿import game_framework
 import main_state
 from pico2d import *
 
@@ -29,7 +29,7 @@ def handle_events():
                 game_framework.change_state(main_state)
 
 
-def draw():
+def draw(frame_time):
     clear_canvas()
     image.draw(400, 300)
     update_canvas()
@@ -40,7 +40,7 @@ def draw():
 
 
 
-def update():
+def update(frame_time):
     pass
 
 

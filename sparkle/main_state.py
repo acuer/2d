@@ -7,6 +7,7 @@ from pico2d import *
 import game_framework
 import title_state
 
+from Define import *
 
 
 name = "MainState"
@@ -21,81 +22,170 @@ class Back:
     def __init__(self):
         self.image = load_image('back.png')
 
-    def draw(self):
+    def draw(self,frame_time):
         self.image.draw(400, 300)
 
 class City:
     def __init__(self):
         self.image = load_image('newMap.png')
 
-    def draw(self):
+    def draw(self,frame_time):
         self.image.draw(400, 689)
 
 class Pause:
     def __init__(self):
         self.image = load_image('hold.png')
 
-    def draw(self):
+    def draw(self,frame_time):
         self.image.draw(400,300)
 
 
 
 class Boy:
     image = None
-    LEFT_RUN, RIGHT_RUN, LEFT_STAND, RIGHT_STAND, JUMP_UP, JUMP_DOWN, LEFT_SIT, RIGHT_SIT = 0, 1, 2, 3, 4, 5, 6, 7
+   
 
     def __init__(self):
-        self.x, self.y = 50, 60
+        self.x, self.y = 50, 70
         self.frame = 0
         self.run_frames = 0
         self.stand_frames = 0
-        self.dir = 1
-        self.state = self.RIGHT_STAND
-        if Boy.image == None:
-            Boy.image = load_image('r_run.png')
+
+        self.state = STATE_STAND
+        self.RightImage = load_image('Iori_Orochi_Right.png')
+        self.LeftImage = load_image('Iori_Orochi_Left.png')
+        self.start = 0
+        self.scene = 0
+        self.cx = 60
+        self.cy = 100
+        self.frameTime = 0
+        self.last = 0
+        self.textureWidth = 4500
+        self.textureHeight = 3500
+        self.canvas_width = get_canvas_width()
+        self.canvas_height = get_canvas_height()
+        self.x_offset = 0
+        self.y_offset = 0
+        self.dir = DIR_RIGHT
+        self.time = SDL_GetTicks()
 
     def handle_event(self, event):
         if(event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
-            if self.state in (self.RIGHT_STAND, self.LEFT_STAND):
-                self.state = self.LEFT_RUN
+            self.dir = DIR_LEFT
+        elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
+            self.dir = DIR_RIGHT
+
+        if(event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
+            if self.state in (STATE_STAND, STATE_PUNCH,STATE_PUNCH2,STATE_PUNCH3):
+                self.state = STATE_WALK
 
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
-            if self.state in (self.RIGHT_STAND, self.LEFT_STAND):
-                self.state = self.RIGHT_RUN
+            if self.state in (STATE_STAND,STATE_PUNCH,STATE_PUNCH2,STATE_PUNCH3):
+                self.state = STATE_WALK
 
         elif(event.type, event.key) == (SDL_KEYUP, SDLK_LEFT):
-            if self.state in (self.LEFT_RUN, ):
-                self.state = self.LEFT_STAND
+            if self.state in (STATE_WALK,):
+                self.state = STATE_STAND
 
         elif(event.type, event.key) == (SDL_KEYUP, SDLK_RIGHT):
-            if self.state in (self.RIGHT_RUN, ):
-                self.state = self.RIGHT_STAND
+            if self.state in (STATE_WALK,):
+                self.state = STATE_STAND
 
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_DOWN):
-            if self.state in (self.RIGHT_STAND, self.RIGHT_RUN ):
-                self.state = self.RIGHT_SIT
-            if self.state in (self.LEFT_STAND, self.LEFT_RUN ):
-                self.state = self.LEFT_SIT
+            if self.state in (STATE_STAND, STATE_WALK ):
+                self.state = STATE_SIT
 
         elif(event.type, event.key) == (SDL_KEYUP, SDLK_DOWN):
-            if self.state in (self.LEFT_SIT, ):
-                self.state = self.LEFT_STAND
-            elif self.state in (self.RIGHT_SIT, ):
-                self.state = self.RIGHT_STAND
+            if self.state in (STATE_SIT, ):
+                self.state = STATE_STAND
+         
+        elif( event.type,event.key ) == (SDL_KEYDOWN ,SDLK_a ):
+            if self.state in( STATE_STAND , STATE_WALK ):
+                self.state = STATE_PUNCH
+            elif self.state in( STATE_STAND, STATE_WALK):
+                self.state = STATE_PUNCH
 
-     
-
-
-    def update(self):
+        elif( event.type,event.key ) == (SDL_KEYDOWN ,SDLK_s ):
+            if self.state in( STATE_STAND , STATE_WALK ):
+                self.state = STATE_PUNCH2
+            elif self.state in( STATE_STAND, STATE_WALK):
+                self.state = STATE_PUNCH2
         
-        self.frameProcess()
+        elif( event.type,event.key ) == (SDL_KEYDOWN ,SDLK_d ):
+            if self.state in( STATE_STAND , STATE_WALK ):
+                self.state = STATE_PUNCH3
+            elif self.state in( STATE_STAND, STATE_WALK):
+                self.state = STATE_PUNCH3
+
+    def update(self,frame_time):
+        
+        self.SetMotion()
+        self.FrameMove(frame_time)
        
-        if self.state == self.RIGHT_RUN:
+        if self.state == STATE_WALK and self.dir == DIR_RIGHT:
             self.x = min(750, self.x + 9)
-        elif self.state == self.LEFT_RUN:
+        elif self.state == STATE_WALK and self.dir == DIR_LEFT:
             self.x = max(50, self.x - 9)
             
 
+    def SetMotion(self):
+        if (self.state == STATE_STAND):
+            if self.scene != RES_STAND:
+                self.start = 0
+            
+            self.cx = 150
+            self.cy = 150
+            self.scene = RES_STAND
+            self.frameTime = 100
+            self.last = 7
+
+        if (self.state == STATE_WALK):
+            if self.scene != RES_WALK:
+                self.start = 0
+            
+      
+            self.cx = 150
+            self.last = 6
+            self.scene = RES_WALK
+            self.frameTime = 100
+            
+        if (self.state == STATE_PUNCH):
+            if self.scene != RES_PUNCH:
+                self.start = 0
+            
+            self.scene = RES_PUNCH
+            self.frameTime = 100
+            self.last = 4
+
+        if (self.state == STATE_PUNCH2):
+            if self.scene != 6:
+                self.start = 0
+            
+            self.scene = 6
+            self.frameTime = 100
+            self.last = 6
+
+        
+        if (self.state == STATE_PUNCH3):
+            if self.scene != 7:
+                self.start = 0
+            
+            self.scene = 7
+            self.frameTime = 100
+            self.last = 6
+
+    def FrameMove(self,frame_time):
+    
+        if self.frameTime + self.time < SDL_GetTicks():
+            self.time = SDL_GetTicks()
+            self.start += 1
+
+        if self.start >= self.last:
+            if self.state == STATE_PUNCH or self.state == STATE_PUNCH2 or self.state == STATE_PUNCH3:
+                self.state == STATE_STAND
+                self.start = 0
+            else:
+                self.start =0
 
         # clip_draw( left, bottom,  width, height, x,y )
         # left: draw될 texture의 x position
@@ -104,45 +194,38 @@ class Boy:
         # height: draw될 texture의 세로 
         # x: player position X
         # y: player position Y
-    def draw(self):
-        if self.state == self.RIGHT_RUN:
-            self.image = load_image('r_run.png')
-            self.image.clip_draw(self.frame * 100, 0, 95, 95, self.x, self.y - 10)
+    def draw(self,frame_time):
+        if self.dir == DIR_RIGHT:
+          self.RightImage.clip_draw( self.start * self.cx, self.textureHeight - ( self.cy * self.scene), 
+                                 self.cx, self.cy,self.x, self.y);
+        elif self.dir == DIR_LEFT:
+            self.LeftImage.clip_draw( self.start * self.cx, self.textureHeight - ( self.cy * self.scene), 
+                                 self.cx, self.cy,self.x, self.y);
+        #if self.state == self.RIGHT_RUN:
+        #    self.image = load_image('r_run.png')
+        #    self.image.clip_draw(self.frame * 100, 0, 95, 95, self.x, self.y - 10)
         
-        elif self.state == self.LEFT_RUN:
-            self.image = load_image('l_run.png')
-            self.image.clip_draw(self.frame * 102, 0, 90, 95, self.x, self.y - 10)
+        #elif self.state == self.LEFT_RUN:
+        #    self.image = load_image('l_run.png')
+        #    self.image.clip_draw(self.frame * 102, 0, 90, 95, self.x, self.y - 10)
 
-        elif self.state == self.LEFT_STAND:
-            self.image = load_image('l_stand.png')
-            self.image.clip_draw(self.frame * 67, 0, 67, 108, self.x, self.y)
+        #elif self.state == self.LEFT_STAND:
+        #    self.image = load_image('l_stand.png')
+        #    self.image.clip_draw(self.frame * 67, 0, 67, 108, self.x, self.y)
 
-        elif self.state == self.RIGHT_STAND:
-            self.image = load_image('r_stand.png')
-            self.image.clip_draw(self.frame * 67, 0, 67, 108, self.x, self.y)
+        #elif self.state == RIGHT_STAND:
+        #    self.image = load_image('r_stand.png')
+        #    self.image.clip_draw(self.frame * 67, 0, 67, 108, self.x, self.y)
 
-        elif self.state == self.LEFT_SIT:
-            self.image = load_image('lsit.png')
-            self.image.clip_draw(self.frame * 53, 0, 53, 73, self.x, self.y - 15)
+        #elif self.state == self.LEFT_SIT:
+        #    self.image = load_image('lsit.png')
+        #    self.image.clip_draw(self.frame * 53, 0, 53, 73, self.x, self.y - 15)
 
-        elif self.state == self.RIGHT_SIT:
-            self.image = load_image('rsit.png')
-            self.image.clip_draw(self.frame * 53, 0, 53, 73, self.x, self.y - 15)
+        #elif self.state == self.RIGHT_SIT:
+        #    self.image = load_image('rsit.png')
+        #    self.image.clip_draw(self.frame * 53, 0, 53, 73, self.x, self.y - 15)
 
-        
-
-            
-
-    def frameProcess(self):
-         
-
-         if self.state == self.LEFT_RUN or self.state == self.RIGHT_RUN:
-            self.frame = (self.frame + 1) % 8
-         elif self.state == self.RIGHT_STAND or self.state == self.LEFT_STAND:
-            self.frame = (self.frame + 1 ) % 7
-         elif self.state == self.RIGHT_SIT or self.state == self.LEFT_SIT:
-             self.frame = (self.frame + 1 ) % 4
-      
+       
 
 def enter():
     global boy, city, back
@@ -180,15 +263,15 @@ def handle_events():
             boy.handle_event(event)
 
 
-def update():
-    boy.update()
+def update(frame_time):
+    boy.update(frame_time)
 
 
-def draw():
+def draw(frame_time):
     clear_canvas()
-    back.draw()
-    city.draw()
-    boy.draw()
+    back.draw(frame_time)
+    city.draw(frame_time)
+    boy.draw(frame_time)
     update_canvas()
     delay(0.05)
 
