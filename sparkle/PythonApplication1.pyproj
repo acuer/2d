@@ -22,10 +22,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="background.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Define.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="game_framework.py" />
+    <Compile Include="hero.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main_state.py" />
     <Compile Include="mygame.py" />
     <Compile Include="start_state.py" />
@@ -39,12 +45,6 @@
     <Content Include=".idea\sparkle.iml" />
     <Content Include=".idea\vcs.xml" />
     <Content Include=".idea\workspace.xml" />
-    <Content Include="back.png" />
-    <Content Include="hold.png" />
-    <Content Include="kpu_credit.png" />
-    <Content Include="l_run.png" />
-    <Content Include="l_stand.png" />
-    <Content Include="Map.png" />
     <Content Include="resourses\BossWorm_Artpack\BossWorm_notes.txt" />
     <Content Include="resourses\BossWorm_Artpack\s_bsswrm_barf_strip12.png" />
     <Content Include="resourses\BossWorm_Artpack\s_bsswrm_biteE_strip5.png" />
@@ -93,10 +93,6 @@
     <Content Include="resourses\NITD_Boss1.png" />
     <Content Include="resourses\Skeleton.gif" />
     <Content Include="resourses\Yuri02.PNG" />
-    <Content Include="r_run.png" />
-    <Content Include="r_stand.png" />
-    <Content Include="title.png" />
-    <Content Include="Yuri02.PNG" />
     <Content Include="__pycache__\game_framework.cpython-34.pyc" />
     <Content Include="__pycache__\main_state.cpython-34.pyc" />
     <Content Include="__pycache__\start_state.cpython-34.pyc" />
