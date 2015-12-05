@@ -16,7 +16,7 @@ class Hero:
     image = None
    
 
-    def __init__(self):
+    def __init__(self): 
         self.x, self.y = 50, 70
         self.frame = 0
         self.run_frames = 0
