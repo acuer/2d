@@ -134,13 +134,6 @@ class Monster:
                 self.iDirX = DIR_RIGHT
                 self.iState = STATE_BLANKA_WALK
 
-        #elif iDistX < 80 and iDistY > 60 and iDistY < 90:
-        #    self.iState = STATE_BLANKA_WALK
-        #    self.bDown = True
-        #    self.bAir = True
-
-        
-
 
     def SetMotion(self):
         if (self.iState == STATE_BLANKA_STAND):
