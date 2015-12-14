@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "Main.py", line 12, in <module>
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 53, in run
+    stack[-1].Input(frame_time)
+  File "C:\2D\Sparkle\Main\Logo_State.py", line 32, in Input
+    g_Logo.Input(event)
+  File "C:\2D\Sparkle\Main\Logo.py", line 42, in Input
+    MainFrameWork.change_state(Stage1_State)
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 11, in change_state
+    state.Enter()
+  File "C:\2D\Sparkle\Main\Stage1_State.py", line 34, in Enter
+    g_Player = Player.Player()
+  File "C:\2D\Sparkle\Main\Player.py", line 36, in __init__
+    self.Sound = SoundMgr.SoundMgr()
+  File "C:\2D\Sparkle\Main\SoundMgr.py", line 9, in __init__
+    self.BackGround = load_music('Sound\\muran.mp3')
+  File "C:\2D\Sparkle\Main\pico2d.py", line 355, in load_music
+    raise IOError
+OSError
+Traceback (most recent call last):
+  File "Main.py", line 12, in <module>
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 53, in run
+    stack[-1].Input(frame_time)
+  File "C:\2D\Sparkle\Main\Logo_State.py", line 32, in Input
+    g_Logo.Input(event)
+  File "C:\2D\Sparkle\Main\Logo.py", line 42, in Input
+    MainFrameWork.change_state(Stage1_State)
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 11, in change_state
+    state.Enter()
+  File "C:\2D\Sparkle\Main\Stage1_State.py", line 34, in Enter
+    g_Player = Player.Player()
+  File "C:\2D\Sparkle\Main\Player.py", line 36, in __init__
+    self.Sound = SoundMgr.SoundMgr()
+  File "C:\2D\Sparkle\Main\SoundMgr.py", line 9, in __init__
+    self.BackGround = load_music('Sound\\muran.mp3')
+  File "C:\2D\Sparkle\Main\pico2d.py", line 355, in load_music
+    raise IOError
+OSError
+Traceback (most recent call last):
+  File "Main.py", line 12, in <module>
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 53, in run
+    stack[-1].Input(frame_time)
+  File "C:\2D\Sparkle\Main\Logo_State.py", line 32, in Input
+    g_Logo.Input(event)
+  File "C:\2D\Sparkle\Main\Logo.py", line 42, in Input
+    MainFrameWork.change_state(Stage1_State)
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 11, in change_state
+    state.Enter()
+  File "C:\2D\Sparkle\Main\Stage1_State.py", line 34, in Enter
+    g_Player = Player.Player()
+  File "C:\2D\Sparkle\Main\Player.py", line 36, in __init__
+    self.Sound = SoundMgr.SoundMgr()
+  File "C:\2D\Sparkle\Main\SoundMgr.py", line 9, in __init__
+    self.BackGround = load_music('Sound\\muran.mp3')
+  File "C:\2D\Sparkle\Main\pico2d.py", line 355, in load_music
+    raise IOError
+OSError
+Traceback (most recent call last):
+  File "Main.py", line 12, in <module>
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 53, in run
+    stack[-1].Input(frame_time)
+  File "C:\2D\Sparkle\Main\Logo_State.py", line 32, in Input
+    g_Logo.Input(event)
+  File "C:\2D\Sparkle\Main\Logo.py", line 42, in Input
+    MainFrameWork.change_state(Stage1_State)
+  File "C:\2D\Sparkle\Main\MainFrameWork.py", line 11, in change_state
+    state.Enter()
+  File "C:\2D\Sparkle\Main\Stage1_State.py", line 34, in Enter
+    g_Player = Player.Player()
+  File "C:\2D\Sparkle\Main\Player.py", line 36, in __init__
+    self.Sound = SoundMgr.SoundMgr()
+  File "C:\2D\Sparkle\Main\SoundMgr.py", line 9, in __init__
+    self.BackGround = load_music('Sound\\muran.mp3')
+  File "C:\2D\Sparkle\Main\pico2d.py", line 355, in load_music
+    raise IOError
+OSError

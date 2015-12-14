@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/sparkle.iml" filepath="$PROJECT_DIR$/.idea/sparkle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Sparkle.iml" filepath="$PROJECT_DIR$/.idea/Sparkle.iml" />
     </modules>
   </component>
 </project>
