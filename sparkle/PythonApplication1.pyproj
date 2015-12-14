@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>28046068-04a2-4673-85d0-1272664a92e8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>mygame.py</StartupFile>
+    <StartupFile>sparkle.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -33,7 +33,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main_state.py" />
-    <Compile Include="mygame.py" />
+    <Compile Include="monster.py" />
+    <Compile Include="sparkle.py" />
     <Compile Include="start_state.py" />
     <Compile Include="title_state.py" />
   </ItemGroup>

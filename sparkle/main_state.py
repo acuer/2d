@@ -21,8 +21,12 @@ running = None
 class City:
     def __init__(self):
         self.image = load_image('newMap.png')
+        self.bgm = load_music('muran.mp3')
+        self.bgm.set_volume(32)
+        self.bgm.repeat_play()
     def draw(self, frame_time):
         self.image.draw(400,300)
+
 
 class Back:
     def __init__(self):

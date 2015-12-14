@@ -41,30 +41,39 @@ class Hero:
         self.dir = DIR_RIGHT
         self.time = SDL_GetTicks()
 
+        self.oldY = 0
+        self.air = False
+
     def handle_event(self, event):
+
         if(event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
             self.dir = DIR_LEFT
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
             self.dir = DIR_RIGHT
 
         if(event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
-            if self.state in (STATE_STAND, STATE_PUNCH,STATE_PUNCH2,STATE_PUNCH3):
+            if self.state in (STATE_STAND, STATE_PUNCH, STATE_PUNCH2, STATE_PUNCH3):
                 self.state = STATE_WALK
+            elif self.state == STATE_JUMP:
+                self.air = True
 
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
-            if self.state in (STATE_STAND,STATE_PUNCH,STATE_PUNCH2,STATE_PUNCH3):
+            if self.state in (STATE_STAND, STATE_PUNCH, STATE_PUNCH2, STATE_PUNCH3):
                 self.state = STATE_WALK
+            elif self.state == STATE_JUMP:
+                self.air = True
 
         elif(event.type, event.key) == (SDL_KEYUP, SDLK_LEFT):
             if self.state in (STATE_WALK,):
                 self.state = STATE_STAND
+            
 
         elif(event.type, event.key) == (SDL_KEYUP, SDLK_RIGHT):
-            if self.state in (STATE_WALK,):
+            if self.state in (STATE_WALK, ):
                 self.state = STATE_STAND
 
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_DOWN):
-            if self.state in (STATE_STAND, STATE_WALK ):
+            if self.state in (STATE_STAND, STATE_WALK):
                 self.state = STATE_SIT
 
         elif(event.type, event.key) == (SDL_KEYUP, SDLK_DOWN):
@@ -72,16 +81,21 @@ class Hero:
                 self.state = STATE_STAND
          
         elif( event.type,event.key ) == (SDL_KEYDOWN ,SDLK_a ):
-            if self.state in( STATE_STAND , STATE_WALK ):
+            if self.state in(STATE_STAND, STATE_WALK):
                 self.state = STATE_PUNCH
        
         elif( event.type,event.key ) == (SDL_KEYDOWN ,SDLK_s ):
-            if self.state in( STATE_STAND , STATE_WALK ):
+            if self.state in(STATE_STAND, STATE_WALK):
                 self.state = STATE_PUNCH2
         
         elif( event.type,event.key ) == (SDL_KEYDOWN ,SDLK_d ):
-            if self.state in( STATE_STAND , STATE_WALK ):
+            if self.state in(STATE_STAND, STATE_WALK):
                 self.state = STATE_PUNCH3
+
+        elif( event.type, event.key) == (SDL_KEYDOWN, SDLK_UP):
+            if self.state != STATE_JUMP:
+                self.state = STATE_JUMP
+                self.oldY = self.y
       
 
     def update(self,frame_time):
@@ -90,13 +104,31 @@ class Hero:
         self.FrameMove(frame_time)
         self.life_time += frame_time
         self.total_frames += Hero.FRAMES_PER_ACTION * Hero.ACTION_PER_TIME * frame_time
+
         if self.state == STATE_WALK and self.dir == DIR_RIGHT:
             self.x = min(750, self.x + 1)
+
         elif self.state == STATE_WALK and self.dir == DIR_LEFT:
             self.x = max(50, self.x - 1)
             
+        if self.state == STATE_JUMP and self.start <= 6:
+            self.y = min(750, self.y + 1)
 
+            if self.air == True and self.dir == DIR_RIGHT:
+                self.x = min(750, self.x + 1)
+            elif self.air == True and self.dir == DIR_LEFT:
+                self.x = max(50, self.x - 1)
+
+        elif self.state == STATE_JUMP and self.start > 6:
+            self.y = max(50, self.y - 1)
+
+            if self.air == True and self.dir == DIR_RIGHT:
+                self.x = min(750, self.x + 1)
+            elif self.air == True and self.dir == DIR_LEFT:
+                self.x = max(50, self.x - 1)
+        
     def SetMotion(self):
+
         if (self.state == STATE_STAND):
             if self.scene != RES_STAND:
                 self.start = 0
@@ -110,7 +142,6 @@ class Hero:
         if (self.state == STATE_WALK):
             if self.scene != RES_WALK:
                 self.start = 0
-            
       
             self.cx = 150
             self.last = 6
@@ -132,7 +163,6 @@ class Hero:
             self.scene = 6
             self.frameTime = 100
             self.last = 6
-
         
         if (self.state == STATE_PUNCH3):
             if self.scene != 7:
@@ -142,6 +172,17 @@ class Hero:
             self.frameTime = 100
             self.last = 6
 
+        if(self.state == STATE_JUMP):
+            if self.scene != 3:
+                self.start = 0
+
+            self.scene = 3
+            self.frameTime = 60
+            self.last = 12
+
+
+
+
     def FrameMove(self,frame_time):
     
         if self.frameTime + self.time < SDL_GetTicks():
@@ -149,6 +190,11 @@ class Hero:
             self.start += 1
 
         if self.start >= self.last:
+            if self.state == STATE_JUMP:
+                self.y = self.oldY
+                self.air = False
+                self.state = STATE_STAND
+
             if self.state == STATE_PUNCH or self.state == STATE_PUNCH2 or self.state == STATE_PUNCH3:
                 self.state = STATE_STAND
                 self.start = 0

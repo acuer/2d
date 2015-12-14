@@ -6,11 +6,13 @@ from pico2d import *
 name = "TitleState"
 image = None
 
+        
 
 def enter():
     global image
     image = load_image('title.png')
-
+    
+    
 
 def exit():
     global image
